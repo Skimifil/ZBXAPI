@@ -2,11 +2,9 @@
 from pyzabbix import ZabbixAPI
 import dotenv
 import os
-from functions.hosts_get import hosts_get
-from functions.triggers_get import triggers_get
-from functions.maintenances_get import maintenances_get
+from menu import menu
 
-# Chamada do arquivo .env
+# Chamada do arquivo .env com as variaveis
 dotenv.load_dotenv(dotenv.find_dotenv())
 
 ZABBIX_API_URL = os.getenv('zbx_api_url')
@@ -15,6 +13,7 @@ PWORD = os.getenv('pword')
 FIEXP = os.getenv('file_export')
 
 
+# Faz a conexão com a API e chama o menu
 def callapi(zabbix_api_url, uname, pword, file_exp):
     zapi = ZabbixAPI(zabbix_api_url)
     zapi.login(uname, pword)
@@ -25,23 +24,9 @@ def callapi(zabbix_api_url, uname, pword, file_exp):
     print("Connected to Zabbix API Version %s" % zapi.api_version())
     file_export = open(file_exp, 'a')
     print('-=============-')
+    menu(zapi, file_export)
 
-
-    '''
-    # Validação dos alertas ativos
-    triggers_get(zapi)
-
-    # Get das manutenções e seus hosts
-    maintenances_get(zapi)
-    '''
-    # Get dos hosts em um Grupo espeficico
-    grupos = ['ACFIN','AMAZONAS', 'ATENTO', 'CNU', 'CSE', 'FRG', 'FURB', 'GLP', 'JSL', 'LEADER', 'MARABRAZ', 'METRORIO', 'ODONTOPREV', 'OVD', 'PETZ', 'RIHAPPY', 'SASCAR', 'SERVICE', 'SODIMAC', 'TECH4', 'TERRALINGUA', 'UNIMED']
-    for gr in grupos:
-        hosts_get(zapi,gr,file_export)
-    file_export.close()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     callapi(ZABBIX_API_URL, UNAME, PWORD, FIEXP)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
