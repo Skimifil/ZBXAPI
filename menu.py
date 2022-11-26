@@ -2,6 +2,7 @@ import time, sys
 from functions.hosts_get import hosts_get
 from functions.triggers_get import triggers_get
 from functions.maintenances_get import maintenances_get
+from functions.audit_get import audit_get
 
 
 def menu(zapi, file_export):
@@ -10,10 +11,11 @@ def menu(zapi, file_export):
     print('[1] - Alertas ativos')
     print('[2] - Manutenções')
     print('[3] - Hosts em um grupo')
+    print('[4] - Audit')
     print('-=============-')
 
     escolha = int(input('Escolha a opção: '))
-    while escolha < 0 or escolha > 3:
+    while escolha < 0 or escolha > 4:
         print('Opção inválida, favor escolher uma opção correspondente ao menu.')
         escolha = int(input('Escolha a opção: '))
     else:
@@ -35,3 +37,6 @@ def menu(zapi, file_export):
                 hosts_get(zapi, gr, file_export)
             file_export.close()
             print('Arquivo de saida gerado!')
+        elif escolha == 4:
+            audit_get(zapi)
+
