@@ -1,7 +1,12 @@
 from datetime import datetime
+import requests
 
 
 def audit_get(zapi):
+    global message, message_subject
+    TOKEN = "TOKEN do ROBOT"
+    chat_id = "ID do chat"
+
     now = datetime.now()
     now_timestamp = datetime.timestamp(now)
     get_timestamp = now_timestamp - 86400
@@ -15,25 +20,93 @@ def audit_get(zapi):
     )
 
     for log_au in audit:
-        print("O usuario: " + log_au['username'] + ", pelo IP: " + log_au['ip'])
-        # TODO = Eu sei que tem um jeito mais fácil de fazer isso, só não lembro
+        # TODO = Ta uma merda esse código, mas estudo uma forma de refatorar depois
         if log_au['action'] == '0':
-            print("Executou a ação de Add o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Add o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Add o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '1':
-            print("Executou a ação de Update o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Update o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Update o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '2':
-            print("Executou a ação de Delete o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Delete o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Delete o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '4':
-            print("Executou a ação de Logout o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Logout o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Logout o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '7':
-            print("Executou a ação de Execute o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Execute o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Execute o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '8':
-            print("Executou a ação de Login o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Login o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Login o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '9':
-            print("Executou a ação de Failed login o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Failed login o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Failed login o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '10':
-            print("Executou a ação de History clear o host " + log_au['resourcename'])
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de History clear o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de History clear o host " + log_au['resourcename'] + "\n" + "-=============-"
+
         elif log_au['action'] == '11':
-            print("Executou a ação de Config refresh o host " + log_au['resourcename'])
-        print("Segue os detalhes: \n" + log_au['details'])
-        print('-=============-')
+            user_name = log_au.get('username')
+            user_name_to_string = str(user_name)
+            print("O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip'])
+            message_subject = "O usuario: " + user_name_to_string + ", pelo IP: " + log_au['ip']
+
+            print("Executou a ação de Config refresh o host " + log_au['resourcename'] + "\n" + "-=============-")
+            message = "Executou a ação de Config refresh o host " + log_au['resourcename'] + "\n" + "-=============-"
+
+        url_sub = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message_subject}"
+        print(requests.get(url_sub).json())
+
+        url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
+        print(requests.get(url).json())
+
+        # print("Segue os detalhes: \n" + log_au['details'])
+        # print('-=============-')
