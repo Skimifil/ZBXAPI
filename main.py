@@ -2,9 +2,9 @@
 from pyzabbix import ZabbixAPI
 import dotenv
 import os
-from menu import menu
+from menu_new import menu
 
-# Chamada do arquivo .env com as variaveis
+# Chamada do arquivo '.env' com as variaveis
 dotenv.load_dotenv(dotenv.find_dotenv())
 
 ZABBIX_API_URL = os.getenv('zbx_api_url')
