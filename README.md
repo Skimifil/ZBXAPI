@@ -7,11 +7,13 @@ Com isso irei utilizar outras tecnologias como banco de dados para armazenar inf
 É preciso criar um arquivo ".env" na pasta raiz com a URL do Zabbix e as credenciais de acesso:
 
 ```shell
-zbx_api_url = http://192.168.18.16/
+zbx_api_url = http://192.168.18.16/api_jsonrpc.php
 uname = user
 pword = pass
+file_export = saida.txt
 ```
 
+Coloquei para que ele faça uma saida em .txt para quando pede os Hosts por grupos.
 
 Próximos passos:
 1. Organizar um menu para seleção de qual função será usada
