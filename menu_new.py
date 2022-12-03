@@ -10,7 +10,7 @@ def menu(zapi, file_export):
     while True:
         resposta = menu_interface(['Sair', 'Alertas ativos', 'Manutenções', 'Hosts em um grupo', 'Audit'])
         if resposta == 0:
-            cabecalho('Saindo do istema...')
+            cabecalho('Saindo do sistema...')
             break
         elif resposta == 1:
             triggers_get(zapi)

@@ -6,7 +6,7 @@ def leiaInt(msg):
             print('\033[31mERRO: por favor, digite um número inteiro válido.\033[m')
             continue
         except KeyboardInterrupt:
-            print('\033[31mUsuuário preferiu não digitar um número.\033[m')
+            print('\033[31mUsuário preferiu não digitar um número.\033[m')
             return 0
         else:
             return n
